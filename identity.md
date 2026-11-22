@@ -64,7 +64,7 @@
 
 **Where we differ.** She trusts an instrument more than a witness. She has lost a place; the author has only read about one. She has a state employer, and has to make her argument in the form the state accepts.
 
-**What has to be found out.** How a chain is laid across a bed. When each tank was last shown on a sheet. Whether the rain really fell short.
+**What has to be found out.** How a chain is laid across a bed. When each tank was last shown on a sheet. Whether the rain really fell short. (It did not. See Day 8 in [log.md](log.md).)
 
 ## G · Pair interview
 
@@ -78,7 +78,7 @@ The five metaphors, the one kept, and what was wrong with the rest are in [metap
 
 - [x] It answers to a real condition I can point to with evidence.
 - [x] Someone who lives inside that condition could hear it speak and not feel mocked.
-- [x] Its position shows something I could not see from my own: that a map stops drawing a tank without saying so.
+- [x] Its position shows something I could not see from my own: that the rain did not fail.
 - [x] Its name is a name.
 - [x] It is not me with a new name, and I can say where we differ.
 - [x] Its rules could become constraints in code next week.

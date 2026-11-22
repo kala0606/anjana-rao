@@ -15,16 +15,16 @@ Every link was opened, and every dataset downloaded, on 22 November 2026.
 5. **Imperilled Waterscapes** — Amrita Sen, Hita Unnikrishnan and Harini Nagendra, *Ecology, Economy and Society*, 2020. https://eprints.whiterose.ac.uk/id/eprint/163963/
    Why: tanks as a connected system, so losing one is never losing one.
 6. **Central and state surveys throw up same, grim result** — ThePrint, 6 June 2025, reporting the Groundwater Directorate. https://theprint.in/environment/central-state-surveys-throw-up-same-grim-result-bengaluru-groundwater-depleting-at-dangerous-pace/2643932
-   Why: two measured depths to water in the east, nine years apart.
+   Why: the two measured depths drawn as the well on every sheet.
 7. **Bengaluru's groundwater conundrum** — Deccan Herald, 13 January 2024. https://www.deccanherald.com/india/karnataka/bengaluru/bengaluru-s-groundwater-conundrum-2847211
-   Why: the thousand-foot figure, spoken by residents and not measured.
+   Why: the thousand-foot figure, spoken by residents and not measured. The reference that struck a line from the manifesto.
 8. **Performance audit on conservation of lakes**, executive summary — Comptroller and Auditor General, Karnataka Report 1 of 2015. https://cag.gov.in/uploads/download_audit_report/2015/Karnataka_Report_1_2015_exc_sum.pdf
    Why: the state's own auditor recording that survey and demarcation of the lakes it checked "remained incomplete".
 
 ## Lineage
 
 9. **Dividing Line** (2001) — Zarina, woodcut. Whitney Museum. https://whitney.org/collection/works/46388
-   Why: a border as one heavy black line cut by hand. What she refuses to draw.
+   Why: a border as one heavy black line cut by hand. The opposite of her stones, and the reason she has none.
 10. **Deccan Traverses: The Making of Bangalore's Terrain** — Anuradha Mathur and Dilip da Cunha, 2006. https://www.mathurdacunha.com/deccan-traverses
     Why: surveying as something done to Bangalore, not just a picture of it.
 11. **Shapolsky et al. Manhattan Real Estate Holdings** (1971) — Hans Haacke. Whitney Museum. https://whitney.org/collection/works/29487
@@ -50,4 +50,4 @@ Every link was opened, and every dataset downloaded, on 22 November 2026.
 18. **Sentences on Conceptual Art** — Sol LeWitt, 1969. https://www.altx.com/vizarts/conceptual.html
     Why: numbered sentences that behave like rules.
 19. **Manifesto for Maintenance Art, 1969!** — Mierle Laderman Ukeles. https://feldmangallery.com/exhibition/manifesto-for-maintenance-art-1969
-    Why: upkeep as work, and the question of who is meant to do it. A tank is kept, or it isn't.
+    Why: upkeep as work, and the question of who is meant to do it. Behind "it was not kept" there is always a keeper.

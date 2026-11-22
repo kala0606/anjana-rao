@@ -16,6 +16,8 @@ My rules:
 
 A boundary is not a line. It is a promise, and I record where it was broken.
 
-The borewells in the east now go past a thousand feet. I draw that depth too.
+The rain did not fail. It fell, and it was not kept.
+
+In March 2024 the water in the east stood 37.76 metres down. I draw that depth too.
 
 You may be living on a tank bed. My map will tell you which one.

@@ -1,16 +1,24 @@
 {
-  "title": "Untitled system",
-  "identity": "[Identity name]",
-  "paper": { "name": "A2", "width": 420, "height": 594, "margin": 20 },
-  "background": "#f7f4ea",
+  "title": "Deficit Survey",
+  "identity": "Anjana Rao",
+  "paper": {
+    "name": "A2",
+    "width": 420,
+    "height": 594,
+    "margin": 20
+  },
+  "background": "#ffffff",
   "seed": 1,
   "params": [
-    { "key": "rows",     "label": "Rows",        "type": "range",  "min": 4,   "max": 160, "step": 1,    "value": 48,   "reason": "Why the identity draws this many. Write your reason here." },
-    { "key": "scale",    "label": "Field scale", "type": "range",  "min": 0.2, "max": 8,   "step": 0.1,  "value": 1.6,  "reason": "" },
-    { "key": "drift",    "label": "Drift",       "type": "range",  "min": 0,   "max": 4,   "step": 0.05, "value": 1.2,  "reason": "" },
-    { "key": "jitter",   "label": "Jitter (mm)", "type": "range",  "min": 0,   "max": 1,   "step": 0.01, "value": 0.08, "reason": "" },
-    { "key": "pen",      "label": "Pen (mm)",    "type": "range",  "min": 0.1, "max": 1.2, "step": 0.05, "value": 0.35, "reason": "" },
-    { "key": "emphasis", "label": "Second pass", "type": "toggle", "value": true, "reason": "" },
-    { "key": "ink",      "label": "Ink",         "type": "color",  "value": "#111110", "reason": "" }
+    {"key": "cell", "label": "Station spacing (m)", "type": "range", "min": 2, "max": 20, "step": 1, "value": 4, "reason": "The distance between two stations on a chain a person can carry. Nothing is drawn between two stations unless both are clear."},
+    {"key": "passes", "label": "Pen passes per 100 mm of water", "type": "range", "min": 0.15, "max": 0.6, "step": 0.05, "value": 0.5, "reason": "Absence is drawn heavier than presence. More water missing is more ink, counted in whole passes of the pen."},
+    {"key": "first", "label": "First year", "type": "range", "min": 1837, "max": 1950, "step": 1, "value": 1901, "reason": "The gauge has been read since 1837. I begin where the daily register begins."},
+    {"key": "ledger", "label": "Ledger", "type": "select", "options": ["what the sky withheld", "what the city did not keep", "both"], "value": "both", "reason": "Before the last sheet that shows the tank, a loss is rain that did not fall. After it, a loss is rain that fell and was not kept."},
+    {"key": "stopped", "label": "Chain stopped by buildings", "type": "toggle", "value": true, "reason": "I can't lay a chain through a wall. The city appears only as the place where measuring had to stop."},
+    {"key": "stone", "label": "Stones every (m)", "type": "range", "min": 10, "max": 60, "step": 5, "value": 25, "reason": "My father kept boundary stones. A boundary is not a line, so I draw none."},
+    {"key": "hand", "label": "Hand (mm)", "type": "range", "min": 0, "max": 0.3, "step": 0.02, "value": 0.08, "reason": "A person held the chain. The shake is mine; the length is not."},
+    {"key": "pen", "label": "Pen (mm)", "type": "range", "min": 0.15, "max": 0.5, "step": 0.05, "value": 0.3, "reason": "The pen that was in the box."},
+    {"key": "tank", "label": "Tank", "type": "select", "options": ["by lot", "Sanegoravanahalli Kere (No. 7)", "Agasana Tank (No. 12)", "Tumkur Kere (No. 13)", "Ramashetty Palya kere (No. 14)", "Agrahar Hosa Kere (No. 16)", "Dharmambudh Tank (No. 19)", "Thyagaraja Nagara Kere (No. 32)", "Karanji Tank (No. 35)", "Kodugondanahalli (No. 42)", "Nagashettihalli lake (No. 44)", "Banaswadi lake (No. 52)", "Hennur Kere (No. 58)", "Kodihalli Tank (No. 59)", "Domlur Kere (No. 60)", "Marenahalli Kere (No. 65)", "Siddapura Kere (No. 66)", "Sunnakal Tank (No. 67)", "Dorasanni Palya Kere (No. 68)", "Koramangala Kere (No. 69)", "Sonnenahalli lake (No. 70)", "Chinnagara Kere (No. 74)", "Sampangi Tank (No. 77)", "Akkitimmanahalli tank (No. 81)", "Parangipalya Kere (No. 91)", "Chelgatta Tank (No. 105)", "Kathreguppe (No. 109)"], "value": "by lot", "reason": "The lot decides which sheet I pull from the register. It never decides what I find there."},
+    {"key": "bearing", "label": "Turn of the chain (degrees)", "type": "range", "min": -30, "max": 30, "step": 1, "value": 0, "reason": "North is the convention of those who own the sheet. I turn the paper to the chain."}
   ]
 }

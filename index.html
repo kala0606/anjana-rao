@@ -3,17 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Press · Computationally Yours</title>
-<meta name="description" content="A generative press: set the parameters, choose a seed, and print.">
-<link rel="stylesheet" href="press/press.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111110'/%3E%3Crect x='3' y='3' width='14' height='26' fill='%23f7f4ea'/%3E%3Crect x='19' y='3' width='10' height='12' fill='%23db261f'/%3E%3Crect x='19' y='17' width='10' height='12' fill='%23f7f4ea'/%3E%3C/svg%3E">
+<title>Anjana Rao · Deficit Survey</title>
+<meta name="description" content="Survey sheets of the irrigation tanks Bengaluru has built over. Choose a lot, read a row, or find out whether you are standing on a tank bed.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="press/press.css?v=2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M6 6 26 26M26 6 6 26' stroke='%23000' stroke-width='5'/%3E%3C/svg%3E">
 </head>
 <body>
 <header class="top">
-  <div class="id"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><div><b id="identity">Loading…</b><span id="title"></span></div></div>
-  <nav class="tabs" role="tablist">
+  <div class="id"><b id="identity">Anjana Rao</b><span id="title">Deficit Survey</span></div>
+  <nav class="tabs" role="tablist" aria-label="Views">
     <button role="tab" data-tab="press" aria-selected="true">Press</button>
-    <button role="tab" data-tab="sheet" aria-selected="false">Sheet</button>
+    <button role="tab" data-tab="sheet" aria-selected="false">Twenty</button>
+    <button role="tab" data-tab="stand" aria-selected="false">Where you stand</button>
     <button role="tab" data-tab="about" aria-selected="false">About</button>
   </nav>
 </header>
@@ -22,19 +25,21 @@
   <section id="tab-press" class="tab press">
     <aside class="controls">
       <div class="seedbox">
-        <label for="seed">Seed</label>
+        <label for="seed">Lot <span>the seed</span></label>
         <div class="seedrow">
-          <button type="button" id="seed-prev" aria-label="Previous seed">←</button>
+          <button type="button" id="seed-prev" aria-label="Previous lot">←</button>
           <input id="seed" type="text" inputmode="numeric" spellcheck="false">
-          <button type="button" id="seed-next" aria-label="Next seed">→</button>
-          <button type="button" id="seed-rand" aria-label="Random seed" title="Random seed">⚄</button>
+          <button type="button" id="seed-next" aria-label="Next lot">→</button>
+          <button type="button" id="seed-rand" aria-label="Draw a lot" title="Draw a lot">Draw</button>
         </div>
+        <p class="reason">Chance decides where I go and which way I face. It never touches a measurement.</p>
       </div>
       <div id="params"></div>
       <button type="button" class="ghost" id="reset">Reset to defaults</button>
     </aside>
     <div class="stage-wrap">
-      <div class="stage" id="stage" aria-live="polite"></div>
+      <p class="reading" id="reading" aria-live="polite"></p>
+      <div class="stage" id="stage"></div>
       <div class="bar">
         <span class="status" id="status"></span>
         <span class="actions">
@@ -47,16 +52,44 @@
   </section>
 
   <section id="tab-sheet" class="tab sheet" hidden>
-    <div class="sheet-head"><p>Twenty seeds with the current parameters. Choose one to open it in the press.</p><span><button type="button" id="sheet-prev">← Previous 20</button><button type="button" id="sheet-next">Next 20 →</button></span></div>
+    <div class="sheet-head"><p>Twenty lots with the current dials. Choose one to open it in the press.</p><span><button type="button" id="sheet-prev">← Previous 20</button><button type="button" id="sheet-next">Next 20 →</button></span></div>
     <div class="grid" id="grid"></div>
   </section>
 
+  <section id="tab-stand" class="tab stand" hidden>
+    <article id="stand">
+      <h1>You may be living on a tank bed.</h1>
+      <p class="lede">This checks where you are against <span id="stand-count">107</span> tanks that are no longer drawn. It happens on your device; your position isn't sent anywhere or kept.</p>
+      <div class="ask">
+        <button type="button" class="primary" id="stand-go">Take a reading here</button>
+        <form id="stand-form"><label for="stand-ll">or a latitude, longitude</label><span><input id="stand-ll" type="text" inputmode="text" placeholder="12.9365, 77.6255" autocomplete="off"><button type="submit">Check</button></span></form>
+      </div>
+      <div class="answer" id="stand-out" aria-live="polite"></div>
+      <h2>The register</h2>
+      <label class="find" for="stand-find">Find a tank or what stands there now</label>
+      <input id="stand-find" type="search" placeholder="Majestic, Ejipura, stadium…">
+      <div class="scroll"><table><thead><tr><th>No.</th><th>Tank</th><th>Last sheet</th><th>Now</th><th></th></tr></thead><tbody id="stand-list"></tbody></table></div>
+      <p class="small">Boundaries were traced from old sheets by the <a href="https://mod-foundation.github.io/download_center/">Mod Foundation</a> and are approximate. They are not a legal survey, and shouldn't be used as one.</p>
+    </article>
+  </section>
+
   <section id="tab-about" class="tab about" hidden>
-    <article id="about"></article>
+    <article id="about">
+      <h1>Anjana Rao</h1>
+      <p class="lede">Surveyor of tank beds. A government land surveyor in 2041, still sent to measure tanks that exist only in the records.</p>
+      <h2>Manifesto</h2><div class="manifesto" id="manifesto">…</div>
+      <h2>The work</h2><div id="statement">…</div>
+      <p class="files"><a href="outputs/production/deficit-survey_74_print.pdf">The exhibited sheet, A2, PDF</a> <a href="identity.md">Identity</a> <a href="references.md">References</a> <a href="log.md">Log</a> <a href="authorship.md">Authorship log</a></p>
+      <h2>How it's made</h2><div id="process">…</div>
+      <h2>The dials</h2><div class="scroll"><table id="dials"></table></div>
+      <h2>Credits</h2>
+      <p>Tank boundaries: Mod Foundation, Bengaluru Watershed. Rain: NOAA GHCN-Monthly v4, Bangalore. Walls and roads: © OpenStreetMap contributors, ODbL. Depth to water: Groundwater Directorate, reported by ThePrint. Letters: A. V. Hershey, 1967.</p>
+      <p>This is a worked example, made for the studio with an AI agent before Day 1 to show what a complete project can hold. Anjana Rao is the studio's example identity. It is nobody's coursework. The physical work hasn't been made yet; the files are ready for it.</p>
+    </article>
   </section>
 </main>
 
-<footer class="foot"><span>A generative press · Computationally Yours · Srishti Manipal Institute · Interim 2026</span><a id="repo-link" href="#">Repository</a></footer>
+<footer class="foot"><span>Worked example · Computationally Yours · Srishti Manipal Institute · Interim 2026</span><a id="repo-link" href="#">Repository</a></footer>
 
 <script type="module" src="press/press.js"></script>
 </body>

@@ -18,13 +18,14 @@ export function render(config, values, seed) {
   var pg = page(config), pen = createPen(pg.width, pg.height);
   var r = rng(seed), nz = noise2D(seed);
   var chance = Object.assign({}, r, { noise: nz, seed: seed });
-  draw(pen, Object.assign({}, values), chance, pg);
+  var info = draw(pen, Object.assign({}, values), chance, pg);
   var title = (config.identity ? config.identity + " · " : "") + (config.title || "") + " · seed " + seed;
   return {
     svg: pen.toSVG({ background: config.background, title: title }),
     plotSVG: pen.toSVG({ title: title }), // no background: what the plotter draws
     count: pen.count(),
-    page: pg
+    page: pg,
+    info: info // what the sheet measured, for the reading line
   };
 }
 

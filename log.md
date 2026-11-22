@@ -38,3 +38,38 @@ One entry a day: Did, Decided, Image, Stuck.
 **Decided:** To submit the proposal with its claim that rainfall fell short, and mark it as the thing I need to find out.
 **Image:** log/day-05.png
 **Stuck:** Did the rain fall short?
+
+## Day 06 · Mon 30 Nov
+
+**Did:** System worksheet A to C. Diagram of inputs, rules, dials and chance. Critique 1: open.
+**Decided:** A scanline, because it is what a chain is. Buildings are not drawn; they are only where the chain stops.
+**Image:** log/day-06.png
+**Stuck:** What is chance allowed to do, if no measurement can be random?
+
+## Day 07 · Tue 1 Dec
+
+**Did:** First run. Rules 1 to 3, one row a year, weight by rainfall deficit, year and reading in the margin. Seed 1 logged.
+**Decided:** Chance picks the tank and the way she faces, nothing else. A surveyor doesn't choose where she is sent.
+**Image:** log/day-07.png
+**Stuck:** The sheet gets lighter towards the present. That is the wrong way round.
+
+## Day 08 · Wed 2 Dec
+
+**Did:** Averaged the gauge. 900 mm a year from 1837 to 1969; 1,047 mm from 1970 to 2023. Only 18 of the last 54 years are below the mean. Wrote a second ledger: after the last sheet that shows the tank, absence is the whole year's rain. Added the walls. Rendered twenty.
+**Decided:** To let the data overturn the proposal. My first system was drawing the sky's fault and leaving the city blank. The rain did not fail. It fell, and it was not kept.
+**Image:** log/day-08.png, the sky's ledger on the left, both ledgers on the right. Edges of the dials in log/day-08-edges.png
+**Stuck:** Sampangi was last drawn in 1870. What do I draw for 1901?
+
+## Day 09 · Thu 3 Dec
+
+**Did:** Added rule 4. If no sheet proves the tank was there that year, two pegs are set and no line is drawn. Manifesto version 3: struck out the thousand feet, put in the two measured depths, added the rain. Peer review: open.
+**Decided:** The empty half of Sampangi stays empty. It would look better full. Nothing proves it.
+**Image:** log/day-09.png
+**Stuck:** Which sheet goes on the wall?
+
+## Day 10 · Fri 4 Dec
+
+**Did:** Seeds 1 to 20 in order, none thrown away: seventeen tanks. Parameter table. Production plan: archival print, with a pen plot of the same seed. A2 pushed. Critique 2: open.
+**Decided:** Chinnagara Kere, seed 1, for the wall. Sampangi is more famous and less proved.
+**Image:** log/day-10.png
+**Stuck:** Will a 1.5 mm letter hold on cotton paper?

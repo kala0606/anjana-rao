@@ -2,9 +2,10 @@
 // seeds, a contact sheet, and downloads. You shouldn't need to edit this
 // file; your rules live in src/system.js and your dials in config/params.json.
 import { render, defaults, fileName } from "./core.js";
+import { standing } from "./standing.js";
 
 var $ = function (id) { return document.getElementById(id); };
-var config, values, seed, sheetStart = 1, timer;
+var config, values, seed, sheetStart = 1, timer, startHash = location.hash;
 
 function readHash() {
   var h = new URLSearchParams(location.hash.slice(1)), v = {};
@@ -66,10 +67,30 @@ function draw() {
   try { r = render(config, values, seed); }
   catch (e) { $("stage").innerHTML = '<p class="status">The system stopped with an error: ' + e.message + "</p>"; console.error(e); return; }
   $("stage").innerHTML = r.svg;
+  reading(r);
   var ms = Math.round(performance.now() - t0);
-  $("status").textContent = "seed " + seed + " · " + r.count + " marks · " + r.page.width + " × " + r.page.height + " mm · " + ms + " ms";
+  $("status").textContent = "lot " + seed + " · " + r.count + " marks · " + r.page.width + " × " + r.page.height + " mm · " + ms + " ms";
   $("seed").value = seed;
   writeHash();
+}
+// ---------- the reading line: point at a row and it says what it is ----------
+function reading(r) {
+  var svg = $("stage").querySelector("svg"), out = $("reading"), info = r.info;
+  if (!svg || !info) return;
+  var rest = info.tank.name + ", Tank No. " + info.tank.fid + (info.tank.now ? ". Now: " + info.tank.now : "") + ". Point at a row to read its year.";
+  out.textContent = rest;
+  var mark = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  mark.setAttribute("x", r.page.margin - 4); mark.setAttribute("width", 2); mark.setAttribute("height", info.rowH); mark.setAttribute("fill", "#000"); mark.setAttribute("visibility", "hidden");
+  svg.appendChild(mark);
+  function at(e) {
+    var b = svg.getBoundingClientRect(), y = (e.clientY - b.top) / b.height * r.page.height, i = Math.floor((y - info.top) / info.rowH), row = info.rows[i];
+    if (!row) { out.textContent = rest; mark.setAttribute("visibility", "hidden"); return; }
+    mark.setAttribute("y", info.top + i * info.rowH); mark.setAttribute("visibility", "visible");
+    var mm = row.mm.toFixed(0) + " mm fell. ";
+    out.textContent = row.year + ": " + mm + (row.state === "unproved" ? "No sheet proves whether the tank was there." : row.state === "lost" ? (row.gone > 0 ? "None of it was kept here." : "") : (row.gone > 0 ? row.gone.toFixed(0) + " mm short of the mean. The tank was on the sheet." : "Not short. The tank was on the sheet."));
+  }
+  svg.addEventListener("pointermove", at); svg.addEventListener("pointerdown", at);
+  svg.addEventListener("pointerleave", function () { out.textContent = rest; mark.setAttribute("visibility", "hidden"); });
 }
 function setSeed(s) { seed = String(s); draw(); if (!$("tab-sheet").hidden) sheet(); }
 
@@ -98,33 +119,48 @@ function downloadPNG() {
 }
 
 // ---------- sheet ----------
+var sheetRun = 0;
 function sheet() {
-  var grid = $("grid"); grid.innerHTML = "";
+  var grid = $("grid"), run = ++sheetRun; grid.innerHTML = "";
   for (var i = 0; i < 20; i++) {
     (function (s) {
-      var b = document.createElement("button"); b.type = "button";
-      try { b.innerHTML = render(config, values, s).svg + "<small>seed " + s + "</small>"; } catch (e) { b.textContent = "seed " + s + ": error"; }
+      var b = document.createElement("button"); b.type = "button"; b.innerHTML = "<small>lot " + s + "</small>";
       b.addEventListener("click", function () { tab("press"); setSeed(s); });
       grid.appendChild(b);
+      setTimeout(function () {                       // one at a time, so a phone keeps up
+        if (run !== sheetRun) return;
+        try {
+          var r = render(config, values, s), img = new Image();
+          img.alt = "Deficit survey of " + r.info.tank.name + ", lot " + s; img.width = 420; img.height = 594;
+          img.onload = function () { URL.revokeObjectURL(img.src); };
+          img.src = URL.createObjectURL(new Blob([r.svg], { type: "image/svg+xml" }));
+          b.innerHTML = ""; b.appendChild(img);
+          var c = document.createElement("small"); c.textContent = "lot " + s + " · " + r.info.tank.name; b.appendChild(c);
+        } catch (e) { b.textContent = "lot " + s + ": error"; }
+      }, 20 + i * 40);
     })(sheetStart + i);
   }
 }
 
 // ---------- about ----------
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function inline(s) { return s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/`(.+?)`/g, "<code>$1</code>").replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>'); }
 function md(text) {
-  var out = [], list = false;
+  var out = [], list = "", first = true;
+  function close() { if (list) { out.push("</" + list + ">"); list = ""; } }
+  function open(k) { if (list !== k) { close(); out.push("<" + k + ">"); list = k; } }
   esc(text).split(/\n/).forEach(function (line) {
-    var l = line.trim();
-    var inline = function (s) { return s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/`(.+?)`/g, "<code>$1</code>").replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>'); };
-    if (/^- /.test(l)) { if (!list) { out.push("<ul>"); list = true; } out.push("<li>" + inline(l.slice(2)) + "</li>"); return; }
-    if (list) { out.push("</ul>"); list = false; }
-    if (/^#{1,6} /.test(l)) return; // headings in the file are replaced by the page's own
-    if (/^<!--/.test(l) || !l) { out.push(""); return; }
+    var l = line.trim(), m;
+    if ((m = /^- (.*)/.exec(l))) { open("ul"); out.push("<li>" + inline(m[1]) + "</li>"); return; }
+    if ((m = /^\d+\. (.*)/.exec(l))) { open("ol"); out.push("<li>" + inline(m[1]) + "</li>"); return; }
+    if (!l || /^&lt;!--/.test(l)) return;
+    close();
+    if ((m = /^(#{1,6}) (.*)/.exec(l))) { if (!first) out.push("<h3>" + inline(m[2]) + "</h3>"); first = false; return; } // the file's own title is replaced by the page's
+    if ((m = /^&gt; ?(.*)/.exec(l))) { if (m[1]) out.push("<blockquote>" + inline(m[1]) + "</blockquote>"); return; }
     out.push("<p>" + inline(l) + "</p>");
   });
-  if (list) out.push("</ul>");
-  return out.join("\n").replace(/<\/p>\n<p>/g, "</p><p>");
+  close();
+  return out.join("\n");
 }
 function repoURL() {
   if (config.repository) return config.repository;
@@ -133,19 +169,21 @@ function repoURL() {
   return null;
 }
 function about() {
-  var a = $("about");
-  var rows = config.params.map(function (p) { return "<tr><td><code>" + esc(p.key) + "</code></td><td>" + esc(p.label || "") + "</td><td>" + (p.type === "range" ? esc(p.min + "–" + p.max) : esc(p.type)) + "</td><td>" + esc(p.reason || "") + "</td></tr>"; }).join("");
-  a.innerHTML = "<h1>" + esc(config.identity || "") + "</h1><p>" + esc(config.title || "") + "</p><h2>Manifesto</h2><div class=\"manifesto\" id=\"manifesto\">…</div><h2>The dials</h2><table><thead><tr><th>Key</th><th>Dial</th><th>Range</th><th>The identity's reason</th></tr></thead><tbody>" + rows + "</tbody></table><h2>How it's made</h2><div id=\"process\">…</div>";
-  fetch("manifesto.md", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { $("manifesto").innerHTML = md(t) || "<p>Not written yet.</p>"; });
-  fetch("process.md", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { $("process").innerHTML = md(t) || "<p>Not written yet.</p>"; });
+  var rows = config.params.map(function (p) { return "<tr><td>" + esc(p.label || p.key) + "</td><td>" + (p.type === "range" ? esc(p.min + " to " + p.max) : p.type === "select" ? esc(p.options.length + " choices") : "on or off") + "</td><td>" + esc(p.reason || "") + "</td></tr>"; }).join("");
+  $("dials").innerHTML = "<thead><tr><th>Dial</th><th>Range</th><th>Her reason</th></tr></thead><tbody>" + rows + "</tbody>";
+  [["manifesto.md", "manifesto"], ["final-statement.md", "statement"], ["process.md", "process"]].forEach(function (f) {
+    fetch(f[0], { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { $(f[1]).innerHTML = md(t) || "<p>Not written yet.</p>"; });
+  });
 }
 
 // ---------- tabs ----------
 function tab(name) {
   document.querySelectorAll(".tabs button").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.tab === name ? "true" : "false"); });
-  ["press", "sheet", "about"].forEach(function (t) { $("tab-" + t).hidden = t !== name; });
+  ["press", "sheet", "stand", "about"].forEach(function (t) { $("tab-" + t).hidden = t !== name; });
   if (name === "sheet") sheet();
   if (name === "about") about();
+  if (name === "stand") standing($("stand"), function (label) { values.tank = label; buildControls(); tab("press"); draw(); });
+  window.scrollTo(0, 0);
 }
 
 // ---------- start ----------
@@ -160,6 +198,7 @@ fetch("config/params.json", { cache: "no-store" }).then(function (r) { return r.
   document.title = (config.identity || "Press") + " · " + (config.title || "Computationally Yours");
   var repo = repoURL(); if (repo) $("repo-link").href = repo; else $("repo-link").remove();
   buildControls(); draw();
+  var go = { "#sheet": "sheet", "#stand": "stand", "#about": "about" }[startHash]; if (go) tab(go);
 
   $("seed").addEventListener("change", function () { setSeed($("seed").value.trim() || "1"); });
   $("seed-prev").addEventListener("click", function () { var n = parseInt(seed, 10); setSeed(isNaN(n) ? 1 : Math.max(1, n - 1)); });
