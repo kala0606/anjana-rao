@@ -73,3 +73,67 @@ One entry a day: Did, Decided, Image, Stuck.
 **Decided:** Chinnagara Kere, seed 1, for the wall. Sampangi is more famous and less proved.
 **Image:** log/day-10.png
 **Stuck:** Will a 1.5 mm letter hold on cotton paper?
+
+## Day 11 · Mon 7 Dec
+
+**Did:** SPEC.md for the print, and for the plot as alternate. Machine demos: open.
+**Decided:** Matte cotton, black only. A record of loss on a glossy sheet would show you your own face.
+**Image:** none
+**Stuck:** Which cotton rag is in the paper store, and what is its profile?
+
+## Day 12 · Tue 8 Dec
+
+**Did:** make.sh turns seed 1 into every file: vector PDF, 300 PPI TIFF, test strip, plot SVG. Compared the plot file with the original pixel by pixel; only rounded tips differ. Six line widths became three pens.
+**Decided:** No paper tint. A fake stain carries a false date.
+**Image:** log/day-12.png, true pixels from the TIFF: 1969 turns into 1970
+**Stuck:** The slit between passes is thinner than a pixel. Will paper close it, and should it?
+
+## Day 13 · Wed 9 Dec
+
+**Did:** Open. The test strip and the plot section need the machines. Files are ready in outputs/production.
+**Decided:**
+**Image:**
+**Stuck:**
+
+## Day 14 · Thu 10 Dec
+
+**Did:** process.md, with a section on what the work can't say. Press tested at phone size; two pages overflowed and were fixed.
+**Decided:** To list every weakness in the evidence on the sheet or next to it. She would want them found.
+**Image:** none
+**Stuck:** Read process.md to someone outside the studio. Open.
+
+## Day 15 · Fri 11 Dec
+
+**Did:** Exhibition proposal and a zone elevation. "Where you stand" added to the press. Critique 3: open. Production file ready to lock once the test strip is seen.
+**Decided:** The press doesn't open on a map of the city. She refuses the view from above, so it asks where you are and answers for that spot.
+**Image:** log/day-15.png
+**Stuck:** Does a visitor see the bed first, or the dates?
+
+## Day 16 · Mon 14 Dec
+
+**Did:** Artist statement. Final print: open.
+**Decided:** To say in the statement that nobody drew the buildings. It is the one thing people won't guess.
+**Image:** none
+**Stuck:** Coordinates on the Collective Atlas: given with the cohort.
+
+## Day 17 · Tue 15 Dec
+
+**Did:** Card, label, manifesto panel and QR code as print files. The code decodes in software from the label PDF. Three phones under the gallery light: open.
+**Decided:** The label gives the seed. Anyone can make the sheet again.
+**Image:** none
+**Stuck:** Print check against the proof.
+
+## Day 18 · Wed 16 Dec
+
+**Did:** README, reflection, submission checklist. Photographs: open.
+**Decided:** To leave the photo folder empty. There is no object yet.
+**Image:** none
+**Stuck:**
+
+## Day 19 · Thu 17 Dec
+
+**Did:** Open. Install.
+
+## Day 20 · Fri 18 Dec
+
+**Did:** Open. The opening.

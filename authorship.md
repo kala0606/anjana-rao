@@ -43,3 +43,17 @@ What the agent suggested, what was kept, what was rejected and why. In this work
 **Kept:** the two depths the Groundwater Directorate measured.
 **Rejected, and why:** the newspaper reports people saying it. Rule one was already written.
 **What this says about the identity:** her rules apply to her first.
+
+## Day 12
+
+**Suggested:** a warm paper tint behind the sheet, so it looks archival.
+**Kept:** white, and whatever colour the cotton already is.
+**Rejected, and why:** an ageing effect is a lie about the date of a record.
+**What this says about the identity:** every line carries its date. A fake stain carries a false one.
+
+## Day 15
+
+**Suggested:** open the press on a map of every lost tank.
+**Kept:** a question instead: are you standing on one?
+**Rejected, and why:** a map of the city from above is the first thing she refuses. The manifesto's last line promises to tell *you* which one, so the page asks where you are, on your own device, and keeps nothing.
+**What this says about the identity:** she works on foot.

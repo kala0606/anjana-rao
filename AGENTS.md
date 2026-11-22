@@ -2,9 +2,15 @@
 
 ## Who this is for
 
-This is a student project in a generative art studio. The student writes as an
-authored identity, [identity name], who [one line: position and condition].
-Read identity.md and manifesto.md before suggesting anything creative.
+This is a worked example for a generative art studio, not a student's
+submission. It was made by an AI agent, text included, which the authorship
+rules below forbid in a student's own project. They are kept here as the
+rules anyone adapting this repository should work by.
+
+The identity is Anjana Rao, a land surveyor in 2041 who measures irrigation
+tanks that Bengaluru has built over and no longer draws. Read identity.md and
+manifesto.md before suggesting anything creative. She refuses: colour,
+gradients, north-up views from above, and anything not in the record.
 
 ## Authorship rules
 
@@ -40,6 +46,9 @@ published as the project's GitHub Pages site.
   gauss, noise). Never use Math.random() in src/: seeds must reproduce.
 - Don't edit press/ unless the student asks to change how the press looks
   or works. Restyling press/press.css for the identity is welcome when asked.
+- Here the press was restyled, and press/standing.js ("Where you stand") and
+  the reading line were added. draw() returns its rows so the press can read
+  them back.
 - Plotter output is the SVG download (strokes only, one layer per pen).
   Archival output is the PNG download at 300 PPI. For resin, add an STL
   export only when the student's pathway needs it, and explain it.
@@ -97,3 +106,5 @@ Rules:
 
 Preview: a local web server in this folder, then open index.html.
 Batch: node press/render.mjs 1-20
+Production files: bash outputs/production/make.sh [path to vpype]
+Data: python3 data/build/prepare.py [folder of downloads]; see data/SOURCES.md

@@ -77,7 +77,7 @@ function draw() {
 function reading(r) {
   var svg = $("stage").querySelector("svg"), out = $("reading"), info = r.info;
   if (!svg || !info) return;
-  var rest = info.tank.name + ", Tank No. " + info.tank.fid + (info.tank.now ? ". Now: " + info.tank.now : "") + ". Point at a row to read its year.";
+  var rest = info.tank.name + ", No. " + info.tank.fid + (info.tank.now ? ". Now: " + info.tank.now : "") + ". Point at or tap a row to read its year.";
   out.textContent = rest;
   var mark = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   mark.setAttribute("x", r.page.margin - 4); mark.setAttribute("width", 2); mark.setAttribute("height", info.rowH); mark.setAttribute("fill", "#000"); mark.setAttribute("visibility", "hidden");
@@ -197,6 +197,7 @@ fetch("config/params.json", { cache: "no-store" }).then(function (r) { return r.
   $("title").textContent = (config.title || "") + (config.paper && config.paper.name ? " · " + config.paper.name : "");
   document.title = (config.identity || "Press") + " · " + (config.title || "Computationally Yours");
   var repo = repoURL(); if (repo) $("repo-link").href = repo; else $("repo-link").remove();
+  if (repo) document.querySelectorAll("[data-repo]").forEach(function (a) { a.href = repo + "/blob/main/" + a.dataset.repo; });
   buildControls(); draw();
   var go = { "#sheet": "sheet", "#stand": "stand", "#about": "about" }[startHash]; if (go) tab(go);
 
@@ -207,6 +208,9 @@ fetch("config/params.json", { cache: "no-store" }).then(function (r) { return r.
   $("reset").addEventListener("click", function () { values = defaults(config); buildControls(); draw(); });
   $("dl-svg").addEventListener("click", downloadSVG);
   $("dl-png").addEventListener("click", downloadPNG);
+  $("close-up").addEventListener("click", function () {
+    var on = $("stage").classList.toggle("close"); this.setAttribute("aria-pressed", on); this.textContent = on ? "Whole sheet" : "Read close";
+  });
   $("copy-link").addEventListener("click", function () {
     var b = this; navigator.clipboard && navigator.clipboard.writeText(location.href).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy link"; }, 1500); });
   });

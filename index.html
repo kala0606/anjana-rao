@@ -7,7 +7,7 @@
 <meta name="description" content="Survey sheets of the irrigation tanks Bengaluru has built over. Choose a lot, read a row, or find out whether you are standing on a tank bed.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="press/press.css?v=2">
+<link rel="stylesheet" href="press/press.css?v=5">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M6 6 26 26M26 6 6 26' stroke='%23000' stroke-width='5'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -43,6 +43,7 @@
       <div class="bar">
         <span class="status" id="status"></span>
         <span class="actions">
+          <button type="button" id="close-up" aria-pressed="false">Read close</button>
           <button type="button" class="primary" id="dl-svg">Download SVG</button>
           <span class="png"><button type="button" id="dl-png">Download PNG</button><select id="ppi" aria-label="PNG resolution"><option value="72">screen</option><option value="150">150 PPI</option><option value="300" selected>300 PPI</option></select></span>
           <button type="button" id="copy-link">Copy link</button>
@@ -62,13 +63,13 @@
       <p class="lede">This checks where you are against <span id="stand-count">107</span> tanks that are no longer drawn. It happens on your device; your position isn't sent anywhere or kept.</p>
       <div class="ask">
         <button type="button" class="primary" id="stand-go">Take a reading here</button>
-        <form id="stand-form"><label for="stand-ll">or a latitude, longitude</label><span><input id="stand-ll" type="text" inputmode="text" placeholder="12.9365, 77.6255" autocomplete="off"><button type="submit">Check</button></span></form>
+        <form id="stand-form"><label for="stand-ll">or a latitude, longitude</label><span><input id="stand-ll" type="text" inputmode="text" placeholder="12.9775, 77.5725" autocomplete="off"><button type="submit">Check</button></span></form>
       </div>
       <div class="answer" id="stand-out" aria-live="polite"></div>
       <h2>The register</h2>
-      <label class="find" for="stand-find">Find a tank or what stands there now</label>
+      <label class="find" for="stand-find">Find a tank or what stands there now. Underlined tanks have a sheet.</label>
       <input id="stand-find" type="search" placeholder="Majestic, Ejipura, stadium…">
-      <div class="scroll"><table><thead><tr><th>No.</th><th>Tank</th><th>Last sheet</th><th>Now</th><th></th></tr></thead><tbody id="stand-list"></tbody></table></div>
+      <div class="scroll"><table><thead><tr><th>No.</th><th>Tank</th><th>Last sheet</th><th>Now</th></tr></thead><tbody id="stand-list"></tbody></table></div>
       <p class="small">Boundaries were traced from old sheets by the <a href="https://mod-foundation.github.io/download_center/">Mod Foundation</a> and are approximate. They are not a legal survey, and shouldn't be used as one.</p>
     </article>
   </section>
@@ -79,7 +80,7 @@
       <p class="lede">Surveyor of tank beds. A government land surveyor in 2041, still sent to measure tanks that exist only in the records.</p>
       <h2>Manifesto</h2><div class="manifesto" id="manifesto">…</div>
       <h2>The work</h2><div id="statement">…</div>
-      <p class="files"><a href="outputs/production/deficit-survey_74_print.pdf">The exhibited sheet, A2, PDF</a> <a href="identity.md">Identity</a> <a href="references.md">References</a> <a href="log.md">Log</a> <a href="authorship.md">Authorship log</a></p>
+      <p class="files"><a href="outputs/production/deficit-survey_74_print.pdf">The exhibited sheet, A2, PDF</a> <a data-repo="identity.md" href="identity.md">Identity</a> <a data-repo="references.md" href="references.md">References</a> <a data-repo="log.md" href="log.md">Log</a> <a data-repo="authorship.md" href="authorship.md">Authorship log</a></p>
       <h2>How it's made</h2><div id="process">…</div>
       <h2>The dials</h2><div class="scroll"><table id="dials"></table></div>
       <h2>Credits</h2>

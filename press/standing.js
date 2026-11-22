@@ -24,7 +24,7 @@ function nearest(rings, lon, lat) {
   });
   return best;
 }
-function name(t) { return t.name === "Unknown" ? "a tank with no name in the register, No. " + t.fid : t.name + ", No. " + t.fid; }
+function name(t) { return t.name === "Unknown" ? "a tank with no name in the register, No.\u00a0" + t.fid : t.name + ", No.\u00a0" + t.fid; }
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
 
 export function standing(root, openSheet) {
@@ -35,8 +35,9 @@ export function standing(root, openSheet) {
     function rows(q) {
       list.innerHTML = all.filter(function (t) { return (t.name + " " + t.now + " " + t.fid).toLowerCase().indexOf(q) >= 0; }).sort(function (a, b) { return (a.name === "Unknown") - (b.name === "Unknown") || a.name.localeCompare(b.name); }).map(function (t) {
         var s = TANKS.find(function (x) { return x.fid === t.fid; });
-        return "<tr><td>" + t.fid + "</td><td>" + (t.name === "Unknown" ? "no name in the register" : esc(t.name)) + "</td><td>" + t.sheet + "</td><td>" + (esc(t.now) || "not recorded") + "</td><td>" + (s ? '<button type="button" data-fid="' + t.fid + '">Sheet</button>' : "") + "</td></tr>";
-      }).join("") || '<tr><td colspan="5">No tank by that name in the register.</td></tr>';
+        var nm = t.name === "Unknown" ? "no name in the register" : esc(t.name);
+        return "<tr><td>" + t.fid + "</td><td>" + (s ? '<button type="button" data-fid="' + t.fid + '">' + nm + "</button>" : nm) + "</td><td>" + t.sheet + "</td><td>" + (esc(t.now) || "not recorded") + "</td></tr>";
+      }).join("") || '<tr><td colspan="4">No tank by that name in the register.</td></tr>';
     }
     rows("");
     find.addEventListener("input", function () { rows(find.value.trim().toLowerCase()); });
@@ -69,7 +70,7 @@ export function standing(root, openSheet) {
     root.querySelector("#stand-form").addEventListener("submit", function (e) {
       e.preventDefault();
       var m = /(-?\d+(?:\.\d+)?)[,\s]+(-?\d+(?:\.\d+)?)/.exec(root.querySelector("#stand-ll").value);
-      if (m) answer(+m[2], +m[1], 0); else out.innerHTML = "<p>Write it as latitude, longitude. For example 12.9365, 77.6255.</p>";
+      if (m) answer(+m[2], +m[1], 0); else out.innerHTML = "<p>Write it as latitude, longitude. For example 12.9775, 77.5725.</p>";
     });
   });
 }
