@@ -46,7 +46,7 @@ Ticked where it is done. Open items need a hand, a machine, a partner or the roo
 
 ## Last checks
 
-- [ ] The repository is public and everything is pushed
+- [x] The repository is public and everything is pushed
 - [x] Nothing private is in it
 - [x] Everything used is credited
 - [ ] I can explain every rule and parameter without the screen. *Only a person can tick this.*
